@@ -1,0 +1,29 @@
+{
+  "name": "secondriveremake",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install": "concurrently \"pnpm run install:inventory\" \"pnpm run install:auth\" \"pnpm run install:payment\" \"pnpm run install:api-gateway\" \"pnpm run install:client\"",
+    "dev": "pnpm run dev:services",
+    "dev:services": "concurrently \"pnpm run dev:inventory\" \"pnpm run dev:auth\" \"pnpm run dev:payment\" \"pnpm run dev:client\"",
+    "install:inventory": "cd apps/inventory-service && pnpm i",
+    "install:auth": "cd apps/auth-service && pnpm i",
+    "install:payment": "cd apps/payment-service && pnpm i",
+    "install:api-gateway": "cd apps/api-gateway && pnpm i",
+    "install:client": "cd apps/client && pnpm i",
+    "dev:inventory": "cd apps/inventory-service && pnpm run start:dev",
+    "dev:auth": "cd apps/auth-service && pnpm run start:dev",
+    "dev:payment": "cd apps/payment-service && pnpm run start:dev",
+    "dev:client": "cd apps/client && pnpm run dev",
+    "dev:docker": "cd infraestructure && docker compose up --build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.1",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
