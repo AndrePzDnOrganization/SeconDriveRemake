@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://second-drive:second-drive@localhost:5432/second-drive"
+}
+
+model User {
+  userId        Int      @id @unique @default(autoincrement())
+  firstName     String
+  lastName      String
+  email         String   @unique
+  password      String
+  streetAddress String
+  building      String
+  zipCode       String
+  city          String
+  country       String
+  phone         String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  cart          Cart?
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
+}
+
+model Tax {
+  taxId      Int      @id @unique @default(autoincrement())
+  zipCode    String
+  percentage Float
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  orders     Order[]
+}
+
+model Product {
+  id           Int           @id @unique @default(autoincrement())
+  categoryId   Int
+  name         String
+  description  String
+  brand        String
+  image        String
+  price        Float
+  stock        Int
+  unitSold     Int
+  discount     Float
+  category     Category      @relation(fields: [categoryId], references: [id])
+  cartProducts CartProduct[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Cart {
+  id           Int           @id @unique @default(autoincrement()) @map("cartId")
+  userId       Int           @unique
+  user         User          @relation(fields: [userId], references: [userId])
+  cartProducts CartProduct[]
+  order        Order?
+}
+
+model CartProduct {
+  id        Int     @id @unique @default(autoincrement()) @map("cartProductId")
+  cartId    Int
+  productId Int
+  quantity  Int
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Order {
+  orderId         Int    @id @unique @default(autoincrement())
+  cartId          Int    @unique
+  taxId           Int
+  shippingAddress String
+  billingAddress  String
+  invoiceDetails  String
+  timeEstimation  String
+  cart            Cart   @relation(fields: [cartId], references: [id])
+  tax             Tax    @relation(fields: [taxId], references: [taxId])
+}

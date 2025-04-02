@@ -6,11 +6,11 @@ export interface Category {
 }
 
 export async function getAllCategories(): Promise<Response> {
-  const response = await fetch('/api/category');
+  const response = await fetch("http://localhost/category");
   return response;
 }
 
 export async function getCategory(id: string): Promise<Response> {
-  const response = await fetch(`/api/category/${id}`);
+  const response = await fetch(`http://localhost/category/${id}`);
   return response;
 }

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { CategoryController } from './category/category.controller';
 
 @Module({
   imports: [
@@ -14,5 +15,9 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       },
     ]),
   ],
+  controllers: [
+    CategoryController,
+  ],
+  providers: [],
 })
 export class InventoryModule {}
