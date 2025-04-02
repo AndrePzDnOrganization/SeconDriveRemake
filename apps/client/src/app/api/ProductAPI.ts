@@ -14,18 +14,18 @@ export interface Product {
 }
 
 export async function GetProductsByName(name: string): Promise<Response> {
-  const response = await fetch(`/api/product/search/${name}`);
+  const response = await fetch(`http://localhost/product/search/${name}`);
   return response;
 }
 
 export async function GetAllProducts(): Promise<Response> {
-  const response = await fetch('/api/product');
+  const response = await fetch('http://localhost/product');
   return response;
 }
 
 export async function GetProductByCategory(
   categoryid: string
 ): Promise<Response> {
-  const response = await fetch(`/api/product/category/${categoryid}`);
+  const response = await fetch(`http://localhost/product/category/${categoryid}`);
   return response;
 }

@@ -17,7 +17,7 @@ export interface ProductApi {
 }
 
 export default async function createProduct(): Promise<Response> {
-  const response = await fetch('/api/product', {
+  const response = await fetch('http://localhost/product', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -27,10 +27,10 @@ export default async function createProduct(): Promise<Response> {
 }
 
 export async function getAllProducts(): Promise<Response> {
-  const response = await fetch('/api/product');
+  const response = await fetch('http://localhost/product');
   return response;
 }
 export async function getUniqueProduct(id: string): Promise<Response> {
-  const response = await fetch(`/api/product/${id}`);
+  const response = await fetch(`http://localhost/product/${id}`);
   return response;
 }
